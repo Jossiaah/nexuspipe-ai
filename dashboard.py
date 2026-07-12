@@ -17,12 +17,20 @@ if not firebase_admin._apps:
     try:
         # Check if running live in the cloud container instance environment
         if "firebase_service_account" in st.secrets:
-            # Streamlit converts TOML subsections directly into real dictionaries
             creds_dict = dict(st.secrets["firebase_service_account"])
             
-            # 🛠️ ENHANCED SAFEGUARD: Clean escaped literal string newline gaps automatically
+            # 🛠️ BULLETPROOF PEM SANITIZER: Automatically reconstructs clean key formats
             if "private_key" in creds_dict:
-                creds_dict["private_key"] = creds_dict["private_key"].replace("\\n", "\n")
+                raw_key = creds_dict["private_key"]
+                
+                # Strip out accidental literal string '\\n' marks or raw line breaks
+                clean_key = raw_key.replace("\\n", "\n").replace("\n", " ").strip()
+                
+                # Reconstruct clean PEM block headers and footers with a strict newline
+                if "BEGIN PRIVATE KEY" in clean_key:
+                    payload = clean_key.replace("-----BEGIN PRIVATE KEY-----", "").replace("-----END PRIVATE KEY-----", "").strip()
+                    payload = payload.replace(" ", "") # Remove spaces inside the base64 code block
+                    creds_dict["private_key"] = f"-----BEGIN PRIVATE KEY-----\n{payload}\n-----END PRIVATE KEY-----\n"
                 
             cred = credentials.Certificate(creds_dict)
         else:
