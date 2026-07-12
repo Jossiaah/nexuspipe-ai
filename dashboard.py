@@ -208,6 +208,61 @@ if not st.session_state['authenticated'] and not st.session_state['show_login']:
     with col3:
         st.markdown("<div class='feature-card'><h3 style='color: #3fb950;'>🔐 Cryptographic Isolation</h3><p style='color: #8b949e; font-size: 15px;'>Secured by Firebase verification. User nodes are completely partitioned to guarantee absolute data privacy.</p></div>", unsafe_allow_html=True)
 
+        st.markdown("<br><br><br><h2 style='text-align: center;' class='gradient-text'>Enterprise Node Architecture Pricing</h2>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; color: #8b949e; margin-bottom: 40px;'>Select the automated infrastructure capacity tailored to your operational scale.</p>", unsafe_allow_html=True)
+
+    # 3-Column SaaS Subscription Pricing Layout Grid
+    price_col1, price_col2, price_col3 = st.columns(3)
+    
+    with price_col1:
+        st.markdown("""
+            <div class='feature-card' style='border-top: 3px solid #58a6ff;'>
+                <h3 style='margin-bottom: 5px;'>Starter Node</h3>
+                <h2 style='color: #ffffff; margin-top: 0px;'>$299<span style='font-size: 14px; color: #8b949e;'> / mo</span></h2>
+                <hr style='border-color: #30363d; margin: 15px 0;'>
+                <ul style='color: #8b949e; padding-left: 20px; font-size: 14px; line-height: 2;'>
+                    <li>50 Automated Ingestions / mo</li>
+                    <li>Standard Processing Queue</li>
+                    <li>Core Multi-Agent Triage</li>
+                    <li>Email Integration Support</li>
+                </ul>
+            </div>
+        """, unsafe_allow_html=True)
+        
+    with price_col2:
+        # Highlighted Option to drive maximum conversions
+        st.markdown("""
+            <div class='feature-card' style='border: 1px solid #bc8cff; border-top: 4px solid #bc8cff; background: rgba(188, 140, 255, 0.03);'>
+                <span style='background: #bc8cff; color: #0d1117; font-size: 11px; font-weight: bold; padding: 2px 8px; border-radius: 20px; float: right;'>MOST POPULAR</span>
+                <h3 style='margin-bottom: 5px;'>Growth Node</h3>
+                <h2 style='color: #ffffff; margin-top: 0px;'>$599<span style='font-size: 14px; color: #8b949e;'> / mo</span></h2>
+                <hr style='border-color: #30363d; margin: 15px 0;'>
+                <ul style='color: #c9d1d9; padding-left: 20px; font-size: 14px; line-height: 2;'>
+                    <li>250 Automated Ingestions / mo</li>
+                    <li>Priority Processing Queue</li>
+                    <li>Advanced Markdown Synthesis</li>
+                    <li>Persistent SQL Metric Ledger</li>
+                    <li>24-Hour SLA Ticket Response</li>
+                </ul>
+            </div>
+        """, unsafe_allow_html=True)
+        
+    with price_col3:
+        st.markdown("""
+            <div class='feature-card' style='border-top: 3px solid #3fb950;'>
+                <h3 style='margin-bottom: 5px;'>Enterprise</h3>
+                <h2 style='color: #ffffff; margin-top: 0px;'>$1,199<span style='font-size: 14px; color: #8b949e;'> / mo</span></h2>
+                <hr style='border-color: #30363d; margin: 15px 0;'>
+                <ul style='color: #8b949e; padding-left: 20px; font-size: 14px; line-height: 2;'>
+                    <li>Unlimited Pipeline Ingestions</li>
+                    <li>Dedicated Server Instances</li>
+                    <li>Custom LLM Prompt Tuning</li>
+                    <li>Multi-Tenant Token Auditing</li>
+                    <li>12-Hour Priority Live SLA</li>
+                </ul>
+            </div>
+        """, unsafe_allow_html=True)
+
 # ----------------- LAYER 2: PREMIUM AUTHENTICATION CARD -----------------
 elif st.session_state['show_login'] and not st.session_state['authenticated']:
     
