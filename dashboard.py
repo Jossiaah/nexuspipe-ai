@@ -140,7 +140,7 @@ if not st.session_state['authenticated'] and not st.session_state['show_login']:
     st.markdown("<h3 style='text-align: center; color: #8b949e; font-weight: 400; max-width: 800px; margin: 0 auto 40px auto;'>Instantly transform unstructured system failure data into engineer-ready root-cause documentation. Powered by multi-model orchestration.</h3>", unsafe_allow_html=True)
     
     # Core Account Navigation CTA
-    left, mid, right = st.columns()
+    left, mid, right = st.columns(3)
     with mid:
         if st.button("🚀 Access Enterprise Dashboard Node", type="primary", use_container_width=True):
             st.session_state['show_login'] = True
