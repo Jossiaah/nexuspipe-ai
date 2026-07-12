@@ -139,41 +139,58 @@ if not st.session_state['authenticated'] and not st.session_state['show_login']:
     st.markdown("<h1 style='text-align: center; font-size: 64px; margin-bottom: 10px;' class='gradient-text'>NexusPipe AI</h1>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center; color: #8b949e; font-weight: 400; max-width: 800px; margin: 0 auto 40px auto;'>Instantly transform unstructured system failure data into engineer-ready root-cause documentation. Powered by multi-model orchestration.</h3>", unsafe_allow_html=True)
     
-    # Main CTA Button to toggle Login Card
-    left, mid, right = st.columns([2, 1, 2])
+    # Core Account Navigation CTA
+    left, mid, right = st.columns()
     with mid:
-        if st.button("🚀 Access Console Node", type="primary", use_container_width=True):
+        if st.button("🚀 Access Enterprise Dashboard Node", type="primary", use_container_width=True):
             st.session_state['show_login'] = True
             st.rerun()
             
     st.markdown("<br><br><br>", unsafe_allow_html=True)
     
+    # 🪝 THE FREE HOOK: INTERACTIVE SANDBOX EXPERIMENT
+    st.markdown("<h3 style='text-align: center; color: #ffffff;'>⚡ Free Core Triage Sandbox</h3>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; color: #8b949e;'>Paste a single raw system crash log below to test our real-time extraction matrix instantly.</p>", unsafe_allow_html=True)
+    
+    sandbox_input = st.text_area("", placeholder="Paste raw log data here... (e.g., CRITICAL: DB connection timeout at 14:22)", label_visibility="collapsed")
+    
+    if sandbox_input:
+        if st.button("Analyze Log via Sandbox Core"):
+            with st.spinner("Extracting basic triage summary..."):
+                try:
+                    # Runs ONLY the cost-efficient triage agent
+                    sandbox_res = openai_client.chat.completions.create(
+                        model="gpt-4o-mini",
+                        messages=[
+                            {"role": "system", "content": "Extract core error and timestamp. Be brief. Maximum 3 bullet points."},
+                            {"role": "user", "content": sandbox_input}
+                        ]
+                    )
+                    st.info(sandbox_res.choices[0].message.content)
+                    
+                    # Premium Upsell Action Banner Block
+                    st.markdown("""
+                        <div style="background-color: rgba(188, 140, 255, 0.1); border: 1px dashed #bc8cff; padding: 20px; border-radius: 12px; margin-top: 15px; text-align: center;">
+                            <h4 style="color: #bc8cff; margin-top: 0px;">💎 Unlock Deep Engineering Root-Cause Reports</h4>
+                            <p style="color: #8b949e; font-size: 14px;">Sandbox triage is capped at simple summaries. Our full platform deploys secondary synthesis layers via Claude 3.5 Sonnet to compile downloadable systems infrastructure action plans.</p>
+                        </div>
+                    """, unsafe_allow_html=True)
+                    if st.button("Upgrade to Full NexusPipe Account Nodes", use_container_width=True):
+                        st.session_state['show_login'] = True
+                        st.rerun()
+                except Exception as e:
+                    st.error(f"Sandbox utility connection reset: {e}")
+
+    st.markdown("<br><br><br><hr style='border-color: #30363d;'><br>", unsafe_allow_html=True)
+    
     # 3-Column Product Feature Framework
     col1, col2, col3 = st.columns(3)
-    
     with col1:
-        st.markdown("""
-            <div class='feature-card'>
-                <h3 style='color: #58a6ff;'>🔌 Multi-Agent Triage</h3>
-                <p style='color: #8b949e; font-size: 15px; line-height: 1.6;'>Routes raw data strings sequentially through custom OpenAI validation scripts and Anthropic synthesis models for flawless diagnostic parsing.</p>
-            </div>
-        """, unsafe_allow_html=True)
-        
+        st.markdown("<div class='feature-card'><h3 style='color: #58a6ff;'>🔌 Multi-Agent Triage</h3><p style='color: #8b949e; font-size: 15px;'>Routes data sequentially through custom OpenAI validation and Anthropic synthesis models.</p></div>", unsafe_allow_html=True)
     with col2:
-        st.markdown("""
-            <div class='feature-card'>
-                <h3 style='color: #bc8cff;'>🗄️ Relational Ledgers</h3>
-                <p style='color: #8b949e; font-size: 15px; line-height: 1.6;'>Every automation job logs to an immutable SQL ledger layer, recording status variables and running real-time API token volume tracking.</p>
-            </div>
-        """, unsafe_allow_html=True)
-        
+        st.markdown("<div class='feature-card'><h3 style='color: #bc8cff;'>🗄️ Relational Ledgers</h3><p style='color: #8b949e; font-size: 15px;'>Every job logs to an immutable SQL layer, recording status variables and usage tracking.</p></div>", unsafe_allow_html=True)
     with col3:
-        st.markdown("""
-            <div class='feature-card'>
-                <h3 style='color: #3fb950;'>🔐 Cryptographic Isolation</h3>
-                <p style='color: #8b949e; font-size: 15px; line-height: 1.6;'>Secured by enterprise Firebase verification. User nodes are completely partitioned to guarantee absolute dataset privacy.</p>
-            </div>
-        """, unsafe_allow_html=True)
+        st.markdown("<div class='feature-card'><h3 style='color: #3fb950;'>🔐 Cryptographic Isolation</h3><p style='color: #8b949e; font-size: 15px;'>Secured by Firebase verification. User nodes are completely partitioned to guarantee absolute data privacy.</p></div>", unsafe_allow_html=True)
 
 # ----------------- LAYER 2: PREMIUM AUTHENTICATION CARD -----------------
 elif st.session_state['show_login'] and not st.session_state['authenticated']:
