@@ -15,13 +15,18 @@ load_dotenv()
 # Initialize Firebase Admin SDK Safely
 if not firebase_admin._apps:
     try:
-        # Check if running live in the cloud environment
+        # Check if running live in the cloud container instance environment
         if "firebase_service_account" in st.secrets:
-            # Streamlit automatically processes TOML subsections into raw dictionaries
+            # Streamlit converts TOML subsections directly into real dictionaries
             creds_dict = dict(st.secrets["firebase_service_account"])
+            
+            # 🛠️ ENHANCED SAFEGUARD: Clean escaped literal string newline gaps automatically
+            if "private_key" in creds_dict:
+                creds_dict["private_key"] = creds_dict["private_key"].replace("\\n", "\n")
+                
             cred = credentials.Certificate(creds_dict)
         else:
-            # Fallback connection path for offline testing on your desktop
+            # Fallback path for offline desktop testing configurations
             cred = credentials.Certificate("firebase_creds.json")
             
         firebase_admin.initialize_app(cred)
