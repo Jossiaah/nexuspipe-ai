@@ -15,15 +15,18 @@ load_dotenv()
 # Initialize Firebase Admin SDK Safely
 if not firebase_admin._apps:
     try:
-        cred = credentials.Certificate("firebase_creds.json")
+        # Check if running live in the cloud environment
+        if "firebase_service_account" in st.secrets:
+            # Streamlit automatically processes TOML subsections into raw dictionaries
+            creds_dict = dict(st.secrets["firebase_service_account"])
+            cred = credentials.Certificate(creds_dict)
+        else:
+            # Fallback connection path for offline testing on your desktop
+            cred = credentials.Certificate("firebase_creds.json")
+            
         firebase_admin.initialize_app(cred)
     except Exception as e:
-        st.error(f"❌ Failed to load firebase_creds.json: {e}")
-
-openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-anthropic_client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
-
-st.set_page_config(page_title="NexusPipe AI — Autonomous Data Pipelines", page_icon="🌐", layout="wide")
+        st.error(f"❌ Failed to load Firebase Authentication Node: {e}")
 
 # PREMIUM MARKETING & APPLICATION THEME STYLING
 st.markdown("""
