@@ -208,7 +208,7 @@ if not st.session_state['authenticated'] and not st.session_state['show_login']:
     with col3:
         st.markdown("<div class='feature-card'><h3 style='color: #3fb950;'>🔐 Cryptographic Isolation</h3><p style='color: #8b949e; font-size: 15px;'>Secured by Firebase verification. User nodes are completely partitioned to guarantee absolute data privacy.</p></div>", unsafe_allow_html=True)
 
-        st.markdown("<br><br><br><h2 style='text-align: center;' class='gradient-text'>Enterprise Node Architecture Pricing</h2>", unsafe_allow_html=True)
+    st.markdown("<br><br><br><h2 style='text-align: center; width: 100%;' class='gradient-text'>Enterprise Node Architecture Pricing</h2>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center; color: #8b949e; margin-bottom: 40px;'>Select the automated infrastructure capacity tailored to your operational scale.</p>", unsafe_allow_html=True)
 
     # 3-Column SaaS Subscription Pricing Layout Grid
@@ -234,7 +234,7 @@ if not st.session_state['authenticated'] and not st.session_state['show_login']:
         st.markdown("""
             <div class='feature-card' style='border: 1px solid #bc8cff; border-top: 4px solid #bc8cff; background: rgba(188, 140, 255, 0.03);'>
                 <span style='background: #bc8cff; color: #0d1117; font-size: 11px; font-weight: bold; padding: 2px 8px; border-radius: 20px; float: right;'>MOST POPULAR</span>
-                <h3 style='margin-bottom: 5px;'>Growth Node</h3>
+                <h3 style='margin-top: 0px; margin-bottom: 5px; font-size: 1.35rem;'>Growth Node</h3>
                 <h2 style='color: #ffffff; margin-top: 0px;'>$599<span style='font-size: 14px; color: #8b949e;'> / mo</span></h2>
                 <hr style='border-color: #30363d; margin: 15px 0;'>
                 <ul style='color: #c9d1d9; padding-left: 20px; font-size: 14px; line-height: 2;'>
